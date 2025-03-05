@@ -1,22 +1,25 @@
-#VPC
+# VPC
 resource "aws_vpc" "main" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"  #optional
+  cidr_block       = var.vpc_cidr
+  instance_tenancy = "default"
 
   tags = {
-    Name = "Hello-app-vpc"
+    Name = var.vpc_name
   }
 }
-#SUBNET
+
+# SUBNET
 resource "aws_subnet" "subnet" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.subnet_cidr
+  map_public_ip_on_launch = true
 
   tags = {
-    Name = "Hello-app-subnet"
+    Name = var.subnet_name
   }
 }
-#IGW
+
+# INTERNET GATEWAY
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
@@ -24,7 +27,8 @@ resource "aws_internet_gateway" "gw" {
     Name = "IGW"
   }
 }
-#ROUTETABLE
+
+# ROUTE TABLE
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.main.id
 
@@ -37,13 +41,9 @@ resource "aws_route_table" "public_rt" {
     Name = "Public Route Table"
   }
 }
-#SUBNET ASSOCIATION
+
+# ROUTE TABLE ASSOCIATION
 resource "aws_route_table_association" "public_subnet_association" {
-  subnet_id      = aws_subnet.public_subnet.id
+  subnet_id      = aws_subnet.subnet.id
   route_table_id = aws_route_table.public_rt.id
 }
-
-
-
-
-
