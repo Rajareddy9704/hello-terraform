@@ -13,9 +13,9 @@ resource "aws_instance" "tomcat" {
   }
 }
 
+# Security Group inside EC2 module
 resource "aws_security_group" "tomcat_sg" {
-  name        = "tomcat-security-group"
-  description = "Allow SSH and Tomcat traffic"
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 22
@@ -38,8 +38,6 @@ resource "aws_security_group" "tomcat_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "Tomcat-SG"
-  }
+  tags = { Name = "Tomcat-SG" }
 }
 
