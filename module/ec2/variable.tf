@@ -16,13 +16,4 @@ variable "key_name" {
   default     = "nv-key"
 }
 
-// variable "subnet_id" {
-//   description = "Subnet ID for the EC2 instance"
-//   type        = string
-  
-// }
 
-// variable "security_group" {
-//   description = "Security group ID"
-//   type        = string
-// }
