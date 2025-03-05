@@ -1,15 +1,18 @@
+# Call VPC Module
 module "networking" {
-  source      = "./modules/networking"
-  vpc_cidr    = "10.0.0.0/16"
-  vpc_name    = "Hello-app-vpc"
-  subnet_cidr = "10.0.1.0/24"
-  subnet_name = "Hello-app-subnet"
+  source      = "./modules/vpc"
+  vpc_cidr    = var.vpc_cidr
+  subnet_cidr = var.subnet_cidr
+  vpc_name    = var.vpc_name
+  subnet_name = var.subnet_name
 }
 
-output "vpc_id" {
-  value = module.vpc.vpc_id
-}
-
-output "subnet_id" {
-  value = module.vpc.subnet_id
+# Call EC2 Module (Includes Security Group)
+module "ec2_instance" {
+  source         = "./modules/ec2"
+  ami_id         = var.ami_id
+  instance_type  = var.instance_type
+  key_name       = var.key_name
+  subnet_id      = module.networking.subnet_id
+  vpc_id         = module.networking.vpc_id
 }
