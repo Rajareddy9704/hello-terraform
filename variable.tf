@@ -22,7 +22,7 @@ variable "subnet_name" {
 # EC2 Variables
 variable "ami_id" {
   description = "AMI ID for EC2 instance"
-  default     = "ami-05b10e08d247fb927" # Replace with valid AMI ID
+  default     = "ami-0b03299ddb99998e9" # Replace with valid AMI ID
 }
 
 variable "instance_type" {
@@ -32,5 +32,5 @@ variable "instance_type" {
 
 variable "key_name" {
   description = "Key pair for SSH access"
-  default     = "nv-key"
+  default     = "demo"
 }
