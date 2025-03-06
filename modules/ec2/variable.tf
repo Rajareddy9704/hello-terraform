@@ -1,7 +1,7 @@
 variable "ami_id" {
   description = "AMI ID for the EC2 instance"
   type        = string
-  default     = "ami-05b10e08d247fb927"
+  default     = "ami-0d8eee72f13bd7a0f"
 }
 
 variable "instance_type" {
@@ -13,7 +13,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "SSH key pair name"
   type        = string
-  default     = "nv-key"
+  default     = "demo"
 }
 
 variable "subnet_id" {
