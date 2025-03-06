@@ -16,4 +16,16 @@ variable "key_name" {
   default     = "nv-key"
 }
 
+variable "subnet_id" {
+  type = string
+  default = ""
+  
+}
+
+variable "vpc_id" {
+  type = string
+  default = ""
+  
+}
+
 

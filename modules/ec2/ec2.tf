@@ -6,7 +6,7 @@ resource "aws_instance" "tomcat" {
   vpc_security_group_ids = [aws_security_group.tomcat_sg.id]
   associate_public_ip_address = true
 
-  user_data = file("${path.module}/install_tomcat.sh")  # Run script on startup
+  user_data = file("${path.module}/install_tomcat.sh")  
 
   tags = {
     Name = "Tomcat-Server"
