@@ -36,5 +36,14 @@ pipeline {
                 sh 'terraform apply -auto-approve'
             }
         }
+        stage("deploy"){
+            steps {
+                sshagent(['tomcat-deploy']) {
+                 sh "scp -o StrictHostKeyChecking=no target/warfilename Tomcat_User@Tomcat_privateip:/opt/tomcat9/webapps/"
+                 sh "ssh Tomcat_User@Tomcat_privateIp /opt/tomcat9/bin/shutdown.sh"
+                 sh "ssh Tomcat_User@Tomcat_privateIp /opt/tomcat9/bin/startup.sh"
+                }
+            }
+        }    
     }
 }
